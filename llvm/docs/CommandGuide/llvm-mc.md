@@ -169,7 +169,7 @@ Check diagnostics against directives in single-line comments instead of printing
 Directives have the form:
 
 ```text
-<prefix>-<kind>[-re][@<offset>] {{<text>}}
+<prefix>-<kind>[-re][@<offset>] [<count>] {{<text>}}
 ```
 
 - `<prefix>`: `expected` by default, or any prefix listed in the comma-separated `<prefixes>` argument.
@@ -180,6 +180,7 @@ Directives have the form:
   - `@+N` / `@-N`: `N` lines below or above the directive.
   - `@above` / `@below`: the nearest non-directive line above or below.
   - `@unknown`: a diagnostic with no source location.
+- `<count>`: the number of times the diagnostic is expected (defaults to 1).
 
 At most one directive is recognized per line.
 {program}`llvm-mc` succeeds if all directives are matched and no unexpected diagnostics are emitted.
