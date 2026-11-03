@@ -324,10 +324,11 @@ The provided `message` is a string expected to be contained within the generated
 diagnostic. The `-re` suffix may be used to enable regex matching within the
 `message`. When present, the `message` may define regex match sequences within
 `{{` `}}` blocks. The regular expression matcher supports Extended POSIX regular
-expressions (ERE). An optional positive integer count before `{{` specifies how
-many diagnostics the directive must match (default: 1). `expected-` must not be
-preceded by an alphanumeric character, hyphen, or underscore (so e.g.
-`unexpected-error` is ignored). A few examples are shown below:
+expressions (ERE).
+An optional positive integer count before `{{` specifies how many diagnostics the directive must match (default: 1).
+`expected-` must not be preceded by an alphanumeric
+character, hyphen, or underscore (so e.g. `unexpected-error` is ignored). A few
+examples are shown below:
 
 ```mlir
 // Expect an error on the same line.

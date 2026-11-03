@@ -110,8 +110,8 @@ func.func @sections_bounded_reduction_effects(%x: memref<f32>) {
 func.func @sections_unbounded_reduction_effects(%x: memref<f32>) {
   // Without the flag, even a pure recipe is modeled with arbitrary effects.
   // expected-remark@below {{recursive memory effects}}
-  // expected-remark@below {{found an instance of 'read' on resource '<Default>'}}
-  // expected-remark@below {{found an instance of 'write' on resource '<Default>'}}
+  // expected-remark@below 2 {{found an instance of 'read' on resource '<Default>'}}
+  // expected-remark@below 2 {{found an instance of 'write' on resource '<Default>'}}
   // expected-remark@below {{found an instance of 'allocate' on resource '<Default>'}}
   // expected-remark@below {{found an instance of 'free' on resource '<Default>'}}
   omp.sections nowait reduction(@add_f32 %x -> %p : memref<f32>) {
@@ -123,8 +123,8 @@ func.func @sections_unbounded_reduction_effects(%x: memref<f32>) {
 func.func @sections_bounded_private_unbounded_reduction(%x: memref<i32>, %y: memref<f32>) {
   // A bounded private clause does not constrain an unbounded reduction clause.
   // expected-remark@below {{recursive memory effects}}
-  // expected-remark@below {{found an instance of 'read' on resource '<Default>'}}
-  // expected-remark@below {{found an instance of 'write' on resource '<Default>'}}
+  // expected-remark@below 2 {{found an instance of 'read' on resource '<Default>'}}
+  // expected-remark@below 2 {{found an instance of 'write' on resource '<Default>'}}
   // expected-remark@below {{found an instance of 'allocate' on resource '<Default>'}}
   // expected-remark@below {{found an instance of 'free' on resource '<Default>'}}
   omp.sections nowait private(@private_i32 %x -> %px : memref<i32>)
@@ -137,8 +137,8 @@ func.func @sections_bounded_private_unbounded_reduction(%x: memref<i32>, %y: mem
 func.func @sections_unbounded_private_bounded_reduction(%x: memref<i32>, %y: memref<f32>) {
   // A bounded reduction clause does not constrain an unbounded private clause.
   // expected-remark@below {{recursive memory effects}}
-  // expected-remark@below {{found an instance of 'read' on resource '<Default>'}}
-  // expected-remark@below {{found an instance of 'write' on resource '<Default>'}}
+  // expected-remark@below 2 {{found an instance of 'read' on resource '<Default>'}}
+  // expected-remark@below 2 {{found an instance of 'write' on resource '<Default>'}}
   // expected-remark@below {{found an instance of 'allocate' on resource '<Default>'}}
   // expected-remark@below {{found an instance of 'free' on resource '<Default>'}}
   omp.sections nowait private(@private_i32 %x -> %px : memref<i32>)
